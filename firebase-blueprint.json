@@ -1,0 +1,43 @@
+{
+  "entities": {
+    "Prompt": {
+      "title": "Prompt",
+      "description": "A prompt entry managed by the admin and readable by all visitors.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Prompt title displayed on the card and detail modal.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "category": {
+          "type": "string",
+          "description": "Prompt category name.",
+          "enum": ["사진 합성", "스타일 변환", "캐릭터·포스터"],
+          "maxLength": 50
+        },
+        "content": {
+          "type": "string",
+          "description": "Full prompt text preserving line breaks, numbering, and brackets (supports > 1,000 characters up to 10,000).",
+          "minLength": 1,
+          "maxLength": 10000
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the prompt was created."
+        }
+      },
+      "required": ["title", "category", "content", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/prompts/{promptId}": {
+      "schema": {
+        "$ref": "#/entities/Prompt"
+      },
+      "description": "Collection storing all AI prompts. Publicly readable; writable only by verified admin ansejun333@gmail.com."
+    }
+  }
+}
